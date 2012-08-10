@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Requestbinder by dushouke</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Requestbinder</h1>
+        <p class="header">Mapping HTTP request data directly into custom .NET objects (including simple type collections) </p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/dushouke/RequestBinder/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/dushouke/RequestBinder/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/dushouke/RequestBinder">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/dushouke">dushouke</a></p>
+
+
+      </header>
+      <section>
+        <h1>Get Start</h1>
+
+<h2>Intro</h2>
+
+<p>Mapping HTTP request data directly into  custom .NET objects (including simple type collections)</p>
+
+<h2>How to Use</h2>
+
+<p>the html like is</p>
+
+<pre><code>SysNo&lt;input name="ctl00$ContentPlaceHolder1$WebUserControl11$SysNo" type="text" id="ContentPlaceHolder1_WebUserControl11_SysNo" /&gt;&lt;br /&gt;
+Name&lt;input name="ctl00$ContentPlaceHolder1$WebUserControl11$Name" type="text" id="ContentPlaceHolder1_WebUserControl11_Name" /&gt;&lt;br /&gt;
+Time&lt;input name="ctl00$ContentPlaceHolder1$WebUserControl11$Birthday" type="text" id="ContentPlaceHolder1_WebUserControl11_Birthday" /&gt;&lt;br /&gt;
+Good&lt;input id="ContentPlaceHolder1_WebUserControl11_Good" type="checkbox" name="ctl00$ContentPlaceHolder1$WebUserControl11$Good" /&gt;&lt;br /&gt;
+Address.Name&lt;input id="Address.Name" name="Address.Name" type="text" /&gt;&lt;br /&gt;
+Address.SysNo&lt;input id="Address.SysNO" name="Address.SysNo" type="text" /&gt;&lt;br /&gt;
+Test&lt;input id="Text1" name="Test" type="text" /&gt;&lt;br /&gt;
+Test&lt;input id="Text2" name="Test" type="text" /&gt;&lt;br /&gt;
+</code></pre>
+
+<h3>Simple Type</h3>
+
+<pre><code>int sysNo = RequestBinder.UpdateModel&lt;int&gt;("SysNo");
+string Name = RequestBinder.UpdateModel&lt;string&gt;("Name");
+DateTime birthday = RequestBinder.UpdateModel&lt;DateTime&gt;("Birthday");
+string[] test = RequestBinder.UpdateModel&lt;string[]&gt;("Test");
+</code></pre>
+
+<h3>Complex Type</h3>
+
+<p>the model</p>
+
+<pre><code>public class User
+{
+    public int SysNo { get; set; }
+    public string Name { get; set; }
+    public bool Good { get; set; }
+    public DateTime Birthday { get; set; }
+    public Address Address { get; set; }
+    public int[] Test { get; set; }
+    public List&lt;Order&gt; Orders { get; set; }//not support
+}
+public class Order
+{
+    public string OrderID { get; set; }
+
+}
+public class Address
+{
+    public User User { get; set; }
+    public int SysNo { get; set; }
+    public string Name { get; set; }
+}
+
+
+//map like this
+User u = RequestBinder.UpdateModel&lt;User&gt;();
+</code></pre>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
